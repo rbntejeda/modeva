@@ -55,3 +55,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+protected/config/database.php
+index.php
