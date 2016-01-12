@@ -1,19 +1,16 @@
 <?php
 
 /**
- * This is the model class for table "respuesta".
+ * This is the model class for table "eva_respuesta".
  *
- * The followings are the available columns in table 'respuesta':
- * @property integer $PRE_ID
- * @property integer $EVA_ID
- * @property integer $RES_ID
- * @property integer $ALT_ID
+ * The followings are the available columns in table 'eva_respuesta':
+ * @property string $RES_ID
+ * @property string $EVA_ID
+ * @property string $ALT_ID
  *
  * The followings are the available model relations:
- * @property Alternativa[] $alternativas
- * @property Evaluacion $eVA
- * @property Pregunta $pRE
  * @property Alternativa $aLT
+ * @property Evaluacion $eVA
  */
 class Respuesta extends CActiveRecord
 {
@@ -22,7 +19,7 @@ class Respuesta extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'respuesta';
+		return 'eva_respuesta';
 	}
 
 	/**
@@ -33,11 +30,11 @@ class Respuesta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('RES_ID', 'required'),
-			array('PRE_ID, EVA_ID, RES_ID, ALT_ID', 'numerical', 'integerOnly'=>true),
+			array('EVA_ID, ALT_ID', 'required'),
+			array('EVA_ID, ALT_ID', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('PRE_ID, EVA_ID, RES_ID, ALT_ID', 'safe', 'on'=>'search'),
+			array('RES_ID, EVA_ID, ALT_ID', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,10 +46,8 @@ class Respuesta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'alternativas' => array(self::HAS_MANY, 'Alternativa', 'RES_ID'),
-			'eVA' => array(self::BELONGS_TO, 'Evaluacion', 'EVA_ID'),
-			'pRE' => array(self::BELONGS_TO, 'Pregunta', 'PRE_ID'),
 			'aLT' => array(self::BELONGS_TO, 'Alternativa', 'ALT_ID'),
+			'eVA' => array(self::BELONGS_TO, 'Evaluacion', 'EVA_ID'),
 		);
 	}
 
@@ -62,9 +57,8 @@ class Respuesta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'PRE_ID' => 'Pre',
-			'EVA_ID' => 'Eva',
 			'RES_ID' => 'Res',
+			'EVA_ID' => 'Eva',
 			'ALT_ID' => 'Alt',
 		);
 	}
@@ -87,10 +81,9 @@ class Respuesta extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('PRE_ID',$this->PRE_ID);
-		$criteria->compare('EVA_ID',$this->EVA_ID);
-		$criteria->compare('RES_ID',$this->RES_ID);
-		$criteria->compare('ALT_ID',$this->ALT_ID);
+		$criteria->compare('RES_ID',$this->RES_ID,true);
+		$criteria->compare('EVA_ID',$this->EVA_ID,true);
+		$criteria->compare('ALT_ID',$this->ALT_ID,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

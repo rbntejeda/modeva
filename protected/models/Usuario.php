@@ -1,27 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "eva_alternativa".
+ * This is the model class for table "usuario".
  *
- * The followings are the available columns in table 'eva_alternativa':
- * @property string $ALT_ID
- * @property string $PRE_ID
- * @property string $ALT_NOMBRE
- * @property integer $ALT_DESHABILITADO
- *
- * The followings are the available model relations:
- * @property Pregunta $pRE
- * @property Pregunta[] $preguntas
- * @property Respuesta[] $respuestas
+ * The followings are the available columns in table 'usuario':
+ * @property string $USU_ID
+ * @property string $EMP_ID
+ * @property string $USU_RUT
+ * @property string $USU_NOMBRE
+ * @property string $USU_APELLIDOS
+ * @property string $USU_PASSWORD
  */
-class Alternativa extends CActiveRecord
+class Usuario extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'eva_alternativa';
+		return 'usuario';
 	}
 
 	/**
@@ -32,12 +29,13 @@ class Alternativa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('PRE_ID, ALT_NOMBRE, ALT_DESHABILITADO', 'required'),
-			array('ALT_DESHABILITADO', 'numerical', 'integerOnly'=>true),
-			array('PRE_ID', 'length', 'max'=>10),
+			array('EMP_ID, USU_RUT', 'required'),
+			array('EMP_ID', 'length', 'max'=>10),
+			array('USU_RUT', 'length', 'max'=>12),
+			array('USU_NOMBRE, USU_APELLIDOS, USU_PASSWORD', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ALT_ID, PRE_ID, ALT_NOMBRE, ALT_DESHABILITADO', 'safe', 'on'=>'search'),
+			array('USU_ID, EMP_ID, USU_RUT, USU_NOMBRE, USU_APELLIDOS, USU_PASSWORD', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,9 +47,6 @@ class Alternativa extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pRE' => array(self::BELONGS_TO, 'Pregunta', 'PRE_ID'),
-			'preguntas' => array(self::HAS_MANY, 'Pregunta', 'ALT_ID'),
-			'respuestas' => array(self::HAS_MANY, 'Respuesta', 'ALT_ID'),
 		);
 	}
 
@@ -61,10 +56,12 @@ class Alternativa extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ALT_ID' => 'Alt',
-			'PRE_ID' => 'Pre',
-			'ALT_NOMBRE' => 'Alt Nombre',
-			'ALT_DESHABILITADO' => 'Alt Deshabilitado',
+			'USU_ID' => 'Usu',
+			'EMP_ID' => 'Emp',
+			'USU_RUT' => 'Usu Rut',
+			'USU_NOMBRE' => 'Usu Nombre',
+			'USU_APELLIDOS' => 'Usu Apellidos',
+			'USU_PASSWORD' => 'Usu Password',
 		);
 	}
 
@@ -86,10 +83,12 @@ class Alternativa extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ALT_ID',$this->ALT_ID,true);
-		$criteria->compare('PRE_ID',$this->PRE_ID,true);
-		$criteria->compare('ALT_NOMBRE',$this->ALT_NOMBRE,true);
-		$criteria->compare('ALT_DESHABILITADO',$this->ALT_DESHABILITADO);
+		$criteria->compare('USU_ID',$this->USU_ID,true);
+		$criteria->compare('EMP_ID',$this->EMP_ID,true);
+		$criteria->compare('USU_RUT',$this->USU_RUT,true);
+		$criteria->compare('USU_NOMBRE',$this->USU_NOMBRE,true);
+		$criteria->compare('USU_APELLIDOS',$this->USU_APELLIDOS,true);
+		$criteria->compare('USU_PASSWORD',$this->USU_PASSWORD,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,7 +99,7 @@ class Alternativa extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Alternativa the static model class
+	 * @return Usuario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -29,8 +29,9 @@ $this->menu=array(
 		'EVA_ID',
 		'TRA_ID',
 		'EMP_ID',
-		'ESP_ID',
+		'MOD_ID',
 		'EVA_NOTA',
 		'EVA_FECHA',
+		'EVA_INICIO',
 	),
 )); ?>

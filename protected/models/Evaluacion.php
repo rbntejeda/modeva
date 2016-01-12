@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "evaluacion".
+ * This is the model class for table "eva_evaluacion".
  *
- * The followings are the available columns in table 'evaluacion':
- * @property integer $EVA_ID
- * @property integer $TRA_ID
- * @property integer $EMP_ID
- * @property integer $ESP_ID
+ * The followings are the available columns in table 'eva_evaluacion':
+ * @property string $EVA_ID
+ * @property string $TRA_ID
+ * @property string $EMP_ID
+ * @property string $MOD_ID
  * @property integer $EVA_NOTA
  * @property string $EVA_FECHA
+ * @property string $EVA_INICIO
  *
  * The followings are the available model relations:
- * @property Especialidad $eSP
  * @property Trabajador $tRA
  * @property Empresa $eMP
+ * @property Modulo $mOD
  * @property Respuesta[] $respuestas
  */
 class Evaluacion extends CActiveRecord
@@ -24,7 +25,7 @@ class Evaluacion extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'evaluacion';
+		return 'eva_evaluacion';
 	}
 
 	/**
@@ -35,12 +36,12 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('EVA_ID', 'required'),
-			array('EVA_ID, TRA_ID, EMP_ID, ESP_ID, EVA_NOTA', 'numerical', 'integerOnly'=>true),
-			array('EVA_FECHA', 'safe'),
+			array('TRA_ID, EMP_ID, MOD_ID, EVA_FECHA, EVA_INICIO', 'required'),
+			array('EVA_NOTA', 'numerical', 'integerOnly'=>true),
+			array('TRA_ID, EMP_ID, MOD_ID', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('EVA_ID, TRA_ID, EMP_ID, ESP_ID, EVA_NOTA, EVA_FECHA', 'safe', 'on'=>'search'),
+			array('EVA_ID, TRA_ID, EMP_ID, MOD_ID, EVA_NOTA, EVA_FECHA, EVA_INICIO', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,9 +53,9 @@ class Evaluacion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'eSP' => array(self::BELONGS_TO, 'Especialidad', 'ESP_ID'),
 			'tRA' => array(self::BELONGS_TO, 'Trabajador', 'TRA_ID'),
 			'eMP' => array(self::BELONGS_TO, 'Empresa', 'EMP_ID'),
+			'mOD' => array(self::BELONGS_TO, 'Modulo', 'MOD_ID'),
 			'respuestas' => array(self::HAS_MANY, 'Respuesta', 'EVA_ID'),
 		);
 	}
@@ -68,9 +69,10 @@ class Evaluacion extends CActiveRecord
 			'EVA_ID' => 'Eva',
 			'TRA_ID' => 'Tra',
 			'EMP_ID' => 'Emp',
-			'ESP_ID' => 'Esp',
+			'MOD_ID' => 'Mod',
 			'EVA_NOTA' => 'Eva Nota',
 			'EVA_FECHA' => 'Eva Fecha',
+			'EVA_INICIO' => 'Eva Inicio',
 		);
 	}
 
@@ -92,12 +94,13 @@ class Evaluacion extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('EVA_ID',$this->EVA_ID);
-		$criteria->compare('TRA_ID',$this->TRA_ID);
-		$criteria->compare('EMP_ID',$this->EMP_ID);
-		$criteria->compare('ESP_ID',$this->ESP_ID);
+		$criteria->compare('EVA_ID',$this->EVA_ID,true);
+		$criteria->compare('TRA_ID',$this->TRA_ID,true);
+		$criteria->compare('EMP_ID',$this->EMP_ID,true);
+		$criteria->compare('MOD_ID',$this->MOD_ID,true);
 		$criteria->compare('EVA_NOTA',$this->EVA_NOTA);
 		$criteria->compare('EVA_FECHA',$this->EVA_FECHA,true);
+		$criteria->compare('EVA_INICIO',$this->EVA_INICIO,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

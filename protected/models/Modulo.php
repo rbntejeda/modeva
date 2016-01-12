@@ -1,26 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "pregunta_empresa".
+ * This is the model class for table "eva_modulo".
  *
- * The followings are the available columns in table 'pregunta_empresa':
- * @property integer $PEMP_ID
- * @property integer $EMP_ID
- * @property integer $PRE_ID
- * @property integer $PEMP_DESHABILITADO
+ * The followings are the available columns in table 'eva_modulo':
+ * @property string $MOD_ID
+ * @property string $PER_ID
+ * @property string $MOD_NOMBRE
+ * @property string $MOD_DESCRIPCION
  *
  * The followings are the available model relations:
- * @property Pregunta $pRE
- * @property Empresa $eMP
+ * @property Evaluacion[] $evaluacions
+ * @property Perfil $pER
  */
-class PreguntaEmpresa extends CActiveRecord
+class Modulo extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'pregunta_empresa';
+		return 'eva_modulo';
 	}
 
 	/**
@@ -31,11 +31,13 @@ class PreguntaEmpresa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('PEMP_ID, PEMP_DESHABILITADO', 'required'),
-			array('PEMP_ID, EMP_ID, PRE_ID, PEMP_DESHABILITADO', 'numerical', 'integerOnly'=>true),
+			array('PER_ID, MOD_NOMBRE', 'required'),
+			array('PER_ID', 'length', 'max'=>10),
+			array('MOD_NOMBRE', 'length', 'max'=>300),
+			array('MOD_DESCRIPCION', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('PEMP_ID, EMP_ID, PRE_ID, PEMP_DESHABILITADO', 'safe', 'on'=>'search'),
+			array('MOD_ID, PER_ID, MOD_NOMBRE, MOD_DESCRIPCION', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,8 +49,8 @@ class PreguntaEmpresa extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pRE' => array(self::BELONGS_TO, 'Pregunta', 'PRE_ID'),
-			'eMP' => array(self::BELONGS_TO, 'Empresa', 'EMP_ID'),
+			'evaluacions' => array(self::HAS_MANY, 'Evaluacion', 'MOD_ID'),
+			'pER' => array(self::BELONGS_TO, 'Perfil', 'PER_ID'),
 		);
 	}
 
@@ -58,10 +60,10 @@ class PreguntaEmpresa extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'PEMP_ID' => 'Pemp',
-			'EMP_ID' => 'Emp',
-			'PRE_ID' => 'Pre',
-			'PEMP_DESHABILITADO' => 'Pemp Deshabilitado',
+			'MOD_ID' => 'Mod',
+			'PER_ID' => 'Per',
+			'MOD_NOMBRE' => 'Mod Nombre',
+			'MOD_DESCRIPCION' => 'Mod Descripcion',
 		);
 	}
 
@@ -83,10 +85,10 @@ class PreguntaEmpresa extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('PEMP_ID',$this->PEMP_ID);
-		$criteria->compare('EMP_ID',$this->EMP_ID);
-		$criteria->compare('PRE_ID',$this->PRE_ID);
-		$criteria->compare('PEMP_DESHABILITADO',$this->PEMP_DESHABILITADO);
+		$criteria->compare('MOD_ID',$this->MOD_ID,true);
+		$criteria->compare('PER_ID',$this->PER_ID,true);
+		$criteria->compare('MOD_NOMBRE',$this->MOD_NOMBRE,true);
+		$criteria->compare('MOD_DESCRIPCION',$this->MOD_DESCRIPCION,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -97,7 +99,7 @@ class PreguntaEmpresa extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return PreguntaEmpresa the static model class
+	 * @return Modulo the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

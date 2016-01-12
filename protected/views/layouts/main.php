@@ -19,7 +19,7 @@
 <div class="container">    <?php
 $this->widget('bootstrap.widgets.BsNavbar', array(
     'collapse' => true,
-    'brandLabel' => BsHtml::icon(BsHtml::GLYPHICON_FIRE).BsHtml::bold(' WorkShop').BsHtml::small(' Qualitatcorp'),
+    'brandLabel' => BsHtml::icon(BsHtml::GLYPHICON_FIRE).BsHtml::bold(' Modelo de Evaluación').BsHtml::small(' Qualitatcorp'),
     'brandUrl' => Yii::app()->homeUrl,
     'items' => array(
         array(
@@ -28,103 +28,117 @@ $this->widget('bootstrap.widgets.BsNavbar', array(
             'activateParents' => true,
             'items' => array(
                 array(
-                    'label' => 'Evaluacion',
+                    'label' => 'Evaluación',
                     'items' => array(
-                        BsHtml::menuHeader(BsHtml::italics('Competencias Laborales')),
+                        BsHtml::menuHeader(BsHtml::italics('Evaluación')),
                         array(
-                            'label' => 'Administar Competencias Laborales',
+                            'label' => 'Administar Evaluación',
                             'url' => array(
-                                'usuario/admin'
+                                'evaluacion/admin'
                             ),
                         ),
                         array(
-                            'label' => 'Crear Competencias Laborales',
+                            'label' => 'Crear preguntas',
                             'url' => array(
-                                'usuario/create'
+                                'evaluacion/create'
+                            ),
+                        ),
+                        // BsHtml::menuHeader(BsHtml::italics('Modulos')),
+                        // array(
+                        //     'label' => 'Administar Modulos',
+                        //     'url' => array(
+                        //         'evaluacion/adminMOD'
+                        //     ),
+                        // ),
+                        // array(
+                        //     'label' => 'Crear Modulos',
+                        //     'url' => array(
+                        //         'evaluacion/createMOD'
+                        //     ),
+                        // ),
+                        BsHtml::menuHeader(BsHtml::italics('Evaluación Trabajador')),
+                        array(
+                            'label' => 'Evaluar Trabajador',
+                            'url' => array(
+                                'evaluacion/evaluation'
                             ),
                         ),
                         array(
-                            'label' => 'Registros de ingreso',
+                            'label' => 'Resultados Trabajadores',
                             'url' => array(
-                                'usuario/records'
+                                'evaluacion/adminTRA'
                             ),
                         ),
-
+                        BsHtml::menuHeader(BsHtml::italics('Preguntas')),
+                        array(
+                            'label' => 'Administar preguntas',
+                            'url' => array(
+                                'evaluacion/adminPRE'
+                            ),
+                        ),
+                        array(
+                            'label' => 'Crear preguntas',
+                            'url' => array(
+                                'evaluacion/createPRE'
+                            ),
+                        ),
+                        BsHtml::menuHeader(BsHtml::italics('Perfil Tecnico')),
+                        array(
+                            'label' => 'Administar Perfil Tecnico',
+                            'url' => array(
+                                'evaluacion/adminPT'
+                            ),
+                        ),
+                        array(
+                            'label' => 'Crear Perfil Tecnico',
+                            'url' => array(
+                                'evaluacion/createPT'
+                            ),
+                        ),
                     )
                 ),
                 array(
-                    'label' => 'Evaluacion',
+                    'label' => 'Administración',
                     'items' => array(
-                        BsHtml::menuHeader(BsHtml::italics('Competencias Laborales')),
+                        BsHtml::menuHeader(BsHtml::italics('Usuarios')),
                         array(
-                            'label' => 'Administar Competencias Laborales',
+                            'label' => 'Administar Usuarios',
                             'url' => array(
                                 'usuario/admin'
                             ),
                         ),
                         array(
-                            'label' => 'Crear Competencias Laborales',
+                            'label' => 'Crear Usuario',
                             'url' => array(
                                 'usuario/create'
                             ),
                         ),
+                        BsHtml::menuHeader(BsHtml::italics('Empresas')),
                         array(
-                            'label' => 'Registros de ingreso',
+                            'label' => 'Administar Empresas',
                             'url' => array(
-                                'usuario/records'
-                            ),
-                        ),
-
-                    )
-                ),
-                array(
-                    'label' => 'Evaluacion',
-                    'items' => array(
-                        BsHtml::menuHeader(BsHtml::italics('Competencias Laborales')),
-                        array(
-                            'label' => 'Administar Competencias Laborales',
-                            'url' => array(
-                                'usuario/admin'
+                                'empresa/admin'
                             ),
                         ),
                         array(
-                            'label' => 'Crear Competencias Laborales',
+                            'label' => 'Crear Empresa',
                             'url' => array(
-                                'usuario/create'
+                                'empresa/create'
+                            ),
+                        ),
+                        BsHtml::menuHeader(BsHtml::italics('Trabajadores')),
+                        array(
+                            'label' => 'Administar Trabajadores',
+                            'url' => array(
+                                'trabajador/admin'
                             ),
                         ),
                         array(
-                            'label' => 'Registros de ingreso',
+                            'label' => 'Crear Trabajador',
                             'url' => array(
-                                'usuario/records'
+                                'trabajador/create'
                             ),
                         ),
-
-                    )
-                ),
-                array(
-                    'label' => 'Evaluacion',
-                    'items' => array(
-                        BsHtml::menuHeader(BsHtml::italics('Competencias Laborales')),
-                        array(
-                            'label' => 'Administar Competencias Laborales',
-                            'url' => array(
-                                'usuario/admin'
-                            ),
-                        ),
-                        array(
-                            'label' => 'Crear Competencias Laborales',
-                            'url' => array(
-                                'usuario/create'
-                            ),
-                        ),
-                        array(
-                            'label' => 'Registros de ingreso',
-                            'url' => array(
-                                'usuario/records'
-                            ),
-                        ),
-
                     )
                 ),
                 // array(

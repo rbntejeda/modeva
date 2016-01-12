@@ -4,20 +4,21 @@
  * This is the model class for table "empresa".
  *
  * The followings are the available columns in table 'empresa':
- * @property integer $EMP_ID
- * @property integer $COM_ID
+ * @property string $EMP_ID
+ * @property string $COM_ID
  * @property string $EMP_RUT
  * @property string $EMP_NOMBRE
  * @property string $EMP_DIRECCION
  * @property string $EMP_FONO
  * @property string $EMP_EMAIL
- * @property string $EMP_FECHA_CREACION
  * @property integer $EMP_DESHABILITADO
+ * @property string $EMP_CREATE
+ * @property string $EMP_MODIFIED
  *
  * The followings are the available model relations:
  * @property Comuna $cOM
- * @property Evaluacion[] $evaluacions
- * @property PreguntaEmpresa[] $preguntaEmpresas
+ * @property EvaEvaluacion[] $evaEvaluacions
+ * @property EvaPreguntaEmpresa[] $evaPreguntaEmpresas
  * @property Usuario[] $usuarios
  */
 class Empresa extends CActiveRecord
@@ -38,16 +39,16 @@ class Empresa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('EMP_ID, EMP_FECHA_CREACION', 'required'),
-			array('EMP_ID, COM_ID, EMP_DESHABILITADO', 'numerical', 'integerOnly'=>true),
+			array('EMP_RUT, EMP_CREATE', 'required'),
+			array('EMP_DESHABILITADO', 'numerical', 'integerOnly'=>true),
+			array('COM_ID, EMP_FONO', 'length', 'max'=>10),
 			array('EMP_RUT', 'length', 'max'=>12),
 			array('EMP_NOMBRE', 'length', 'max'=>150),
-			array('EMP_FONO', 'length', 'max'=>10),
 			array('EMP_EMAIL', 'length', 'max'=>100),
-			array('EMP_DIRECCION', 'safe'),
+			array('EMP_DIRECCION, EMP_MODIFIED', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('EMP_ID, COM_ID, EMP_RUT, EMP_NOMBRE, EMP_DIRECCION, EMP_FONO, EMP_EMAIL, EMP_FECHA_CREACION, EMP_DESHABILITADO', 'safe', 'on'=>'search'),
+			array('EMP_ID, COM_ID, EMP_RUT, EMP_NOMBRE, EMP_DIRECCION, EMP_FONO, EMP_EMAIL, EMP_DESHABILITADO, EMP_CREATE, EMP_MODIFIED', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +61,8 @@ class Empresa extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cOM' => array(self::BELONGS_TO, 'Comuna', 'COM_ID'),
-			'evaluacions' => array(self::HAS_MANY, 'Evaluacion', 'EMP_ID'),
-			'preguntaEmpresas' => array(self::HAS_MANY, 'PreguntaEmpresa', 'EMP_ID'),
+			'evaEvaluacions' => array(self::HAS_MANY, 'EvaEvaluacion', 'EMP_ID'),
+			'evaPreguntaEmpresas' => array(self::HAS_MANY, 'EvaPreguntaEmpresa', 'EMP_ID'),
 			'usuarios' => array(self::HAS_MANY, 'Usuario', 'EMP_ID'),
 		);
 	}
@@ -79,8 +80,9 @@ class Empresa extends CActiveRecord
 			'EMP_DIRECCION' => 'Emp Direccion',
 			'EMP_FONO' => 'Emp Fono',
 			'EMP_EMAIL' => 'Emp Email',
-			'EMP_FECHA_CREACION' => 'Emp Fecha Creacion',
 			'EMP_DESHABILITADO' => 'Emp Deshabilitado',
+			'EMP_CREATE' => 'Emp Create',
+			'EMP_MODIFIED' => 'Emp Modified',
 		);
 	}
 
@@ -102,15 +104,16 @@ class Empresa extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('EMP_ID',$this->EMP_ID);
-		$criteria->compare('COM_ID',$this->COM_ID);
+		$criteria->compare('EMP_ID',$this->EMP_ID,true);
+		$criteria->compare('COM_ID',$this->COM_ID,true);
 		$criteria->compare('EMP_RUT',$this->EMP_RUT,true);
 		$criteria->compare('EMP_NOMBRE',$this->EMP_NOMBRE,true);
 		$criteria->compare('EMP_DIRECCION',$this->EMP_DIRECCION,true);
 		$criteria->compare('EMP_FONO',$this->EMP_FONO,true);
 		$criteria->compare('EMP_EMAIL',$this->EMP_EMAIL,true);
-		$criteria->compare('EMP_FECHA_CREACION',$this->EMP_FECHA_CREACION,true);
 		$criteria->compare('EMP_DESHABILITADO',$this->EMP_DESHABILITADO);
+		$criteria->compare('EMP_CREATE',$this->EMP_CREATE,true);
+		$criteria->compare('EMP_MODIFIED',$this->EMP_MODIFIED,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

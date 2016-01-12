@@ -1,16 +1,16 @@
 <?php
-/* @var $this EvaluacionController */
-/* @var $model Evaluacion */
+/* @var $this EmpresaController */
+/* @var $model Empresa */
 
 
 $this->breadcrumbs=array(
-	'Evaluacions'=>array('index'),
+	'Empresas'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('icon' => 'glyphicon glyphicon-list','label'=>'List Evaluacion', 'url'=>array('index')),
-	array('icon' => 'glyphicon glyphicon-plus-sign','label'=>'Create Evaluacion', 'url'=>array('create')),
+	array('icon' => 'glyphicon glyphicon-list','label'=>'List Empresa', 'url'=>array('index')),
+	array('icon' => 'glyphicon glyphicon-plus-sign','label'=>'Create Empresa', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -19,7 +19,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#evaluacion-grid').yiiGridView('update', {
+	$('#empresa-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<?php echo BsHtml::pageHeader('Manage','Evaluacions') ?>
+<?php echo BsHtml::pageHeader('Manage','Empresas') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><?php echo BsHtml::button('Advanced search',array('class' =>'search-button', 'icon' => BsHtml::GLYPHICON_SEARCH,'color' => BsHtml::BUTTON_COLOR_PRIMARY), '#'); ?></h3>
@@ -47,18 +47,21 @@ $('.search-form form').submit(function(){
         <!-- search-form -->
 
         <?php $this->widget('bootstrap.widgets.BsGridView',array(
-			'id'=>'evaluacion-grid',
+			'id'=>'empresa-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
 			'columns'=>array(
-        		'EVA_ID',
-		'TRA_ID',
-		'EMP_ID',
-		'MOD_ID',
-		'EVA_NOTA',
-		'EVA_FECHA',
+        		'EMP_ID',
+		'COM_ID',
+		'EMP_RUT',
+		'EMP_NOMBRE',
+		'EMP_DIRECCION',
+		'EMP_FONO',
 		/*
-		'EVA_INICIO',
+		'EMP_EMAIL',
+		'EMP_DESHABILITADO',
+		'EMP_CREATE',
+		'EMP_MODIFIED',
 		*/
 				array(
 					'class'=>'bootstrap.widgets.BsButtonColumn',

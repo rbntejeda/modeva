@@ -1,16 +1,16 @@
 <?php
-/* @var $this EvaluacionController */
-/* @var $model Evaluacion */
+/* @var $this UsuarioController */
+/* @var $model Usuario */
 
 
 $this->breadcrumbs=array(
-	'Evaluacions'=>array('index'),
+	'Usuarios'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('icon' => 'glyphicon glyphicon-list','label'=>'List Evaluacion', 'url'=>array('index')),
-	array('icon' => 'glyphicon glyphicon-plus-sign','label'=>'Create Evaluacion', 'url'=>array('create')),
+	array('icon' => 'glyphicon glyphicon-list','label'=>'List Usuario', 'url'=>array('index')),
+	array('icon' => 'glyphicon glyphicon-plus-sign','label'=>'Create Usuario', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -19,7 +19,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#evaluacion-grid').yiiGridView('update', {
+	$('#usuario-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<?php echo BsHtml::pageHeader('Manage','Evaluacions') ?>
+<?php echo BsHtml::pageHeader('Manage','Usuarios') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><?php echo BsHtml::button('Advanced search',array('class' =>'search-button', 'icon' => BsHtml::GLYPHICON_SEARCH,'color' => BsHtml::BUTTON_COLOR_PRIMARY), '#'); ?></h3>
@@ -47,19 +47,16 @@ $('.search-form form').submit(function(){
         <!-- search-form -->
 
         <?php $this->widget('bootstrap.widgets.BsGridView',array(
-			'id'=>'evaluacion-grid',
+			'id'=>'usuario-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
 			'columns'=>array(
-        		'EVA_ID',
-		'TRA_ID',
+        		'USU_ID',
 		'EMP_ID',
-		'MOD_ID',
-		'EVA_NOTA',
-		'EVA_FECHA',
-		/*
-		'EVA_INICIO',
-		*/
+		'USU_RUT',
+		'USU_NOMBRE',
+		'USU_APELLIDOS',
+		'USU_PASSWORD',
 				array(
 					'class'=>'bootstrap.widgets.BsButtonColumn',
 				),

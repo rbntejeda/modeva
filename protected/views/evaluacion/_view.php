@@ -17,8 +17,8 @@
 	<?php echo CHtml::encode($data->EMP_ID); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ESP_ID')); ?>:</b>
-	<?php echo CHtml::encode($data->ESP_ID); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('MOD_ID')); ?>:</b>
+	<?php echo CHtml::encode($data->MOD_ID); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('EVA_NOTA')); ?>:</b>
@@ -27,6 +27,10 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('EVA_FECHA')); ?>:</b>
 	<?php echo CHtml::encode($data->EVA_FECHA); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('EVA_INICIO')); ?>:</b>
+	<?php echo CHtml::encode($data->EVA_INICIO); ?>
 	<br />
 
 
