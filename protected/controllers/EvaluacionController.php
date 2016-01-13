@@ -32,7 +32,7 @@ class EvaluacionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','evaluation','module'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -46,9 +46,23 @@ class EvaluacionController extends Controller
 	}
 
 	/**
-	* Displays a particular model.
-	* @param integer $id the ID of the model to be displayed
-	*/
+	Evaluacion Trabajador
+	**/
+	public function actionEvaluation()
+	{
+		$model=Perfil::model()->findAll();
+		$this->render('Evaluation/ficha',array('model'=>$model));
+	}
+
+	public function actionModule($id)
+	{
+		$model=Modulo::model()->findAll();
+		$this->render('Evaluation/Modulo',array('model'=>$model,'id'=>$id));
+	}
+
+/**
+	Evaluacion Prueba
+**/
 	public function actionView($id)
 	{
 		$this->render('view',array(

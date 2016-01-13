@@ -58,3 +58,4 @@ $RECYCLE.BIN/
 protected/config/database.php
 /index.php
 /flash/
+*.jpg

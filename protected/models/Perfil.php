@@ -7,6 +7,7 @@
  * @property string $PER_ID
  * @property string $PER_NOMBRE
  * @property string $PER_DESCRIPCION
+ * @property string $PER_IMG
  *
  * The followings are the available model relations:
  * @property Modulo[] $modulos
@@ -29,12 +30,13 @@ class Perfil extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('PER_NOMBRE', 'required'),
+			array('PER_NOMBRE, PER_IMG', 'required'),
 			array('PER_NOMBRE', 'length', 'max'=>300),
+			array('PER_IMG', 'length', 'max'=>100),
 			array('PER_DESCRIPCION', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('PER_ID, PER_NOMBRE, PER_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('PER_ID, PER_NOMBRE, PER_DESCRIPCION, PER_IMG', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +61,7 @@ class Perfil extends CActiveRecord
 			'PER_ID' => 'Per',
 			'PER_NOMBRE' => 'Per Nombre',
 			'PER_DESCRIPCION' => 'Per Descripcion',
+			'PER_IMG' => 'Per Img',
 		);
 	}
 
@@ -83,6 +86,7 @@ class Perfil extends CActiveRecord
 		$criteria->compare('PER_ID',$this->PER_ID,true);
 		$criteria->compare('PER_NOMBRE',$this->PER_NOMBRE,true);
 		$criteria->compare('PER_DESCRIPCION',$this->PER_DESCRIPCION,true);
+		$criteria->compare('PER_IMG',$this->PER_IMG,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

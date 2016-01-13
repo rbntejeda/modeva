@@ -8,6 +8,7 @@
  * @property string $PER_ID
  * @property string $MOD_NOMBRE
  * @property string $MOD_DESCRIPCION
+ * @property string $MOD_IMG
  *
  * The followings are the available model relations:
  * @property Evaluacion[] $evaluacions
@@ -31,13 +32,14 @@ class Modulo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('PER_ID, MOD_NOMBRE', 'required'),
+			array('PER_ID, MOD_NOMBRE, MOD_IMG', 'required'),
 			array('PER_ID', 'length', 'max'=>10),
 			array('MOD_NOMBRE', 'length', 'max'=>300),
+			array('MOD_IMG', 'length', 'max'=>100),
 			array('MOD_DESCRIPCION', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('MOD_ID, PER_ID, MOD_NOMBRE, MOD_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('MOD_ID, PER_ID, MOD_NOMBRE, MOD_DESCRIPCION, MOD_IMG', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class Modulo extends CActiveRecord
 			'PER_ID' => 'Per',
 			'MOD_NOMBRE' => 'Mod Nombre',
 			'MOD_DESCRIPCION' => 'Mod Descripcion',
+			'MOD_IMG' => 'Mod Img',
 		);
 	}
 
@@ -89,6 +92,7 @@ class Modulo extends CActiveRecord
 		$criteria->compare('PER_ID',$this->PER_ID,true);
 		$criteria->compare('MOD_NOMBRE',$this->MOD_NOMBRE,true);
 		$criteria->compare('MOD_DESCRIPCION',$this->MOD_DESCRIPCION,true);
+		$criteria->compare('MOD_IMG',$this->MOD_IMG,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
