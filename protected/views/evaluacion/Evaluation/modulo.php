@@ -10,12 +10,24 @@ $this->menu=array(
 );
  ?>
 
-<?= BsHtml::pageHeader('Módulo',$model2->PER_NOMBRE) ?>
+<?= BsHtml::pageHeader('Módulos',$model2->PER_NOMBRE) ?>
 
 <div class="row">
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th style="width:20px">#</th>
+			<th>Módulo</th>
+			<th style="width:85px">Opciones</th>
+		</tr>
 <?php foreach ($model as $key => $value): ?>
-	<div class="col-sm-6 col-md-4">
-
-	</div>
+		<tr>
+			<td><?=$key+1 ?></td>
+			<td><?=$value->MOD_NOMBRE?></td>
+			<td><?=BsHtml::button('Empezar', array(
+					'color' => BsHtml::BUTTON_COLOR_PRIMARY,
+					'size' => BsHtml::BUTTON_SIZE_MINI));?></td>
+		</tr>
 <?php endforeach ?>
+	</table>
+
 </div>

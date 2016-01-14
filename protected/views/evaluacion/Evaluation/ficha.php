@@ -10,7 +10,7 @@ $this->menu=array(
 );
  ?>
 
- <?php echo BsHtml::pageHeader('Ficha tecnica','Seleccione módulo') ?>
+ <?php echo BsHtml::pageHeader('Seleccione','Perfil Técnico') ?>
 
 <div class="row">
 <?php foreach ($model as $key => $value): ?>
@@ -23,8 +23,8 @@ $this->menu=array(
 		); ?>
 		<h3><?= $value->PER_NOMBRE ?></h3>
         <p><?= $value->PER_DESCRIPCION ?></p>
-        <?= BsHtml::button('Listado de Preguntas', array('color' => BsHtml::BUTTON_COLOR_PRIMARY,'onclick'=>"window.location.href='module/$value->PER_ID'"));?>
-        <?= BsHtml::button('Demo Evaluación', array('color' => BsHtml::BUTTON_COLOR_INFO,'onclick'=>"window.location.href='demo/$value->PER_ID'"));?>
+        <?= BsHtml::button('Módulos', array('color' => BsHtml::BUTTON_COLOR_PRIMARY,'onclick'=>"window.location.href='module/$value->PER_ID'"));?>
+        <?= BsHtml::button('Preguntas', array('color' => BsHtml::BUTTON_COLOR_INFO,'onclick'=>"window.location.href='demo/$value->PER_ID'"));?>
 		</div>
 	</div>
 <?php endforeach ?>
