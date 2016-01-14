@@ -10,12 +10,7 @@ $this->menu=array(
 );
  ?>
 
-<?= BsHtml::pageHeader('Módulo',$model2->PER_NOMBRE) ?>
+ <?php echo BsHtml::pageHeader('Ficha tecnica','Seleccione módulo') ?>
 
 <div class="row">
-<?php foreach ($model as $key => $value): ?>
-	<div class="col-sm-6 col-md-4">
-
-	</div>
-<?php endforeach ?>
 </div>

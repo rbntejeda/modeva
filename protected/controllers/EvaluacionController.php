@@ -32,7 +32,7 @@ class EvaluacionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','evaluation','module'),
+				'actions'=>array('create','update','evaluation','module','demo'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,8 +56,15 @@ class EvaluacionController extends Controller
 
 	public function actionModule($id)
 	{
-		$model=Modulo::model()->findAll();
-		$this->render('Evaluation/Modulo',array('model'=>$model,'id'=>$id));
+		$model=Modulo::model()->findAllByAttributes(array('PER_ID'=>$id));
+		$model2=Perfil::model()->findByPk($id);
+		$this->render('Evaluation/Modulo',array('model'=>$model,'model2'=>$model2));
+	}
+
+	public function actionDemo($id)
+	{
+		$model=Modulo::model()->findAllByAttributes(array('PER_ID'=>$id));
+		$this->render('Evaluation/demo',array('model'=>$model,'id'=>$id));
 	}
 
 /**
